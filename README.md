@@ -2,13 +2,15 @@
 メモ帳
 
 ## ②課題内容（どんな作品か）
-タイトル：お買い物メモ(br)
-自分が欲しかった機能を厳選して作成！(br)
-普通に私生活で使います。
+タイトル：お買い物メモ
 
-<img width="869" height="1883" alt="154083_0" src="https://github.com/user-attachments/assets/d0fcf7e1-bf38-4a84-ac41-fff0326a14e0" />
 
-<img width="869" height="1883" alt="154085" src="https://github.com/user-attachments/assets/43360d95-23bc-41a5-ac14-dde515f44d4c" />
+自分が欲しかった機能を厳選して作成！
+普通に私生活で使おうと思ってつくりました。
+
+<img width="auto" height="180" alt="154083_0" src="https://github.com/user-attachments/assets/d0fcf7e1-bf38-4a84-ac41-fff0326a14e0" />
+
+<img width="auto" height="180" alt="154085" src="https://github.com/user-attachments/assets/43360d95-23bc-41a5-ac14-dde515f44d4c" />
 
 
 
@@ -20,9 +22,9 @@ https://haretane.github.io/kadai_03/
 
 
 ## ⑤工夫した点・こだわった点
-・スマホネイティブで作ってます(br)
-・同じお店で買いたい商品は、連続で入力して追加できる(br)
-・買ったらタップでグレーアウト&取り消し線。（買ったことがわかる）(br)
+-スマホネイティブで作ってます
+-同じお店で買いたい商品は、連続で入力して追加できる
+-買ったらタップでグレーアウト&取り消し線。（買ったことがわかる）
 →不要になったら削除できる
 
 ## ⑥難しかった点・次回トライしたいこと（又は機能）
@@ -32,7 +34,9 @@ https://haretane.github.io/kadai_03/
 ## ⑦フリー項目（感想、シェアしたいこと等なんでも）
 
 機能やレイアウト的にはけっこう使いやすいと思います！！
-使ってみてください！！(br)
+使ってみてください！！
+
+
 
 デザインまでは手が回らなかった💦
 
