@@ -165,6 +165,8 @@ $(document).ready(function() {
             const currentShopName = $(this).text().replace('削除', '').trim();
             if (currentShopName === key) {
                 $(this).siblings('.march-cell').append(`<span>${value}</span>`);
+                const $currentRow = $(this).closest('.table-row');
+                $('#display-table').prepend($currentRow);
                 isExist = true;
                 return false;
                 }
