@@ -52,6 +52,7 @@ label{
     outline: none;
     padding:8px 30px 8px 5px;
     box-sizing:border-box;
+    font-size:16px;
 }
 
 .input-block button {
