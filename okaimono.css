@@ -1,0 +1,152 @@
+
+header h1{
+    text-align: center;
+    font-size:30px;
+    margin-bottom:0px;
+}
+
+body{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+/* 入力エリア */
+
+.input-area{
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    flex-direction: row;
+    margin: 30px;
+}
+
+.input-block{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    border:1px solid #000000;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+label{
+    display: block;
+    border-bottom: 1px solid #000000;
+    width :100%;
+    font-size: 13px;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+.input-field{
+    width: 100%;
+    position:relative;
+    box-sizing:border-box;
+}
+
+.input-block input[type="text"]{
+    width:100%;
+    border:none;
+    outline: none;
+    padding:8px 30px 8px 5px;
+    box-sizing:border-box;
+}
+
+.input-block button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.shop-width {
+    width: 150px;
+}
+
+.item-width {
+    width: 300px;
+}
+
+#register{
+    height:60px;
+    width:40px;
+}
+
+
+/* ディスプレイエリア */
+
+
+.table-row{
+    display:flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 1px 0px;
+    min-height: 45px;
+}
+
+.shop-cell{
+    display:flex;
+    border:1px solid #000000;
+    overflow: hidden;
+    width: 150px;
+    align-items: center;
+    position: relative;
+    padding-left: 5px;
+    padding-right: 40px;
+    box-sizing: border-box;
+    height: auto;
+}
+
+
+.shop-delete-btn{
+    position: absolute;
+    font-size:10px;
+    right: 5px;
+    width:30px;
+    height:40px;
+}
+
+
+.march-cell{
+    display:flex;
+    flex-direction: row;
+    border:1px solid #000000;
+    overflow: hidden;
+    width: 355px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 70px;
+
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+.march-delete-btn{
+    position: absolute;
+    font-size:10px;
+    right: 5px;
+    width:60px;
+    height:40px;
+}
+
+.march-cell span::after {
+    content: ", ";
+    color: #888;
+    margin-right: 15px;
+    display: inline-block;
+}
+.march-cell span:last-of-type::after {
+    content: "";
+}
+
+.march-cell span.checked {
+    color: #bbb;
+    text-decoration: line-through;
+}

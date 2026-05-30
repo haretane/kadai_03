@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お買い物リスト</title>
+    <link rel="stylesheet" href="okaimono.css">
+    <script src="js/jquery-2.1.3.min.js"></script>
+
+</head>
+<body>
+<header>
+<h1>🏬 お買い物リスト 🛒</h1>
+</header>
+
+<div class="input-area">
+
+    <div class="input-block shop-width">
+        <label>お店</label>
+        <div class="input-field">
+            <input type="text" id="shop-input" list="shop-candidates" placeholder="店名を入力">
+            <button type="button" id="input-shop-clear-btn">✖️</button>
+            <datalist id="shop-candidates">
+                <option value="薬局"></option>
+                <option value="スーパー"></option>
+                <option value="コンビニ"></option>
+                <option value="ホームセンター"></option>
+                <option value="カルディ"></option>
+                <option value="百均"></option>
+                <option value="ダイソー"></option>
+                <option value="セリア"></option>
+                <option value="キャンドゥ"></option>
+            </datalist>
+        </div>
+    </div>
+
+    <div class="input-block item-width">
+        <label>商品</label>
+        <div class="input-field">
+            <input type="text" id="shop-march" placeholder="商品を１つずつ入力">
+            <button type="button" id="input-march-clear-btn">✖️</button>
+        </div>
+    </div>
+
+    <div>
+        <button type="button" id="register">登録</button>
+    </div>
+</div>
+
+
+
+<table id="display-table">
+
+    <tr class="table-row" id="empty-row">
+        <td class="shop-cell">
+            </td>
+        <td class="march-cell">
+            </td>
+    </tr>
+
+<!-- ダミー -->
+    <!-- <tr class="table-row">
+        <td class="shop-cell">
+            スーパー
+            <button type="button" class="shop-delete-btn">削除</button>
+        </td>
+        
+        <td class="march-cell">
+            <span>じゃがいも</span>
+            <span>ひきにく</span>
+            <span>玉ねぎ</span>
+            <span>塩・コショウ</span>
+            <span>小麦粉</span>
+            <span>卵</span>
+            <span>パン粉</span>
+            <span>キャベツ</span>
+            <button type="button" class="march-delete-btn">-- を削除</button>
+        </td>
+    </tr>
+
+    <tr class="table-row">
+        <td class="shop-cell">
+            百貨店
+            <button type="button" class="shop-delete-btn">削除</button>
+        </td>
+        <td class="march-cell">
+            <span>メガネ拭き</span>
+            <span>サンバイザー</span>
+            <span>百科事典</span>
+            <button type="button" class="march-delete-btn">-- を削除</button>
+        </td>
+    </tr> -->
+    <!-- ダミーここまで -->
+    
+</table>
+
+
+<script>
+
+$(document).ready(function() {
+
+    // 初期画面
+
+    const savedData = localStorage.getItem('okaimono_list');
+    if (savedData) {
+        const allData = JSON.parse(savedData);
+        if (Object.keys(allData).length === 0) {
+        } else {
+            $('#empty-row').remove();
+
+        }
+        
+                Object.keys(allData).forEach(function(shopName) {
+                    const items = allData[shopName];
+                    let itemsHtml = '';
+                    items.forEach(function(item) {
+                        itemsHtml += `<span>${item}</span>`;
+            });
+        
+        var savedRow = `
+            <tr class="table-row">
+                <td class="shop-cell">
+                    ${shopName}
+                    <button type="button" class="shop-delete-btn">削除</button>
+                </td>
+                <td class="march-cell">
+                    ${itemsHtml}
+                    <button type="button" class="march-delete-btn">-- を削除</button>
+                </td>
+            </tr>
+        `;
+        $('#display-table').append(savedRow);
+        });
+    }
+
+    if (savedData) {
+        const allData = JSON.parse(savedData);
+        Object.keys(allData).reverse().forEach(function(shopName) {
+            $(`#shop-candidates option[value="${shopName}"]`).remove();
+            $('#shop-candidates').prepend(`<option value="${shopName}"></option>`);
+        });
+    }
+
+
+
+
+
+    // 登録おしたら
+    $('#register').on('click', function() {
+
+        const key = $('#shop-input').val().trim();
+        const value = $('#shop-march').val().trim();
+
+                if (key === "" || value === "") {
+                    alert("お店と商品の両方を入力してください！");
+                    return;
+                }
+
+        localStorage.setItem('myShop', key);
+        $('#empty-row').remove();
+
+        let isExist = false;
+
+        $('.shop-cell').each(function() {
+            const currentShopName = $(this).text().replace('削除', '').trim();
+            if (currentShopName === key) {
+                $(this).siblings('.march-cell').append(`<span>${value}</span>`);
+                isExist = true;
+                return false;
+                }
+        });
+
+        
+// 行の追加
+        if (!isExist) {
+
+            var newRow = `
+                        <tr class="table-row">
+                            <td class="shop-cell">
+                                ${key}
+                                <button type="button" class="shop-delete-btn">削除</button>
+                            </td>
+                            <td class="march-cell">
+                                <span>${value}</span>
+                                <button type="button" class="march-delete-btn">-- を削除</button>
+                            </td>
+                        </tr>
+                    `;
+            $('#display-table').prepend(newRow);
+        }
+        saveAllData();
+    $('#shop-march').val('');
+    });
+    $('#shop-march').on('keypress', function(e) {
+        if (e.which === 13) {
+            e.preventDefault();
+            $('#register').click();
+        }
+    });
+
+    $('#display-table').on('click', '.march-cell span', function() {
+        $(this).toggleClass('checked');
+        saveAllData();
+    });
+
+    function saveAllData() {
+        const allData = {};
+        $('#display-table .table-row').each(function() {
+            if ($(this).attr('id') === 'empty-row') return;
+            const shopName = $(this).find('.shop-cell').text().replace('削除', '').trim();
+            const items = [];
+            $(this).find('.march-cell span').each(function() {
+                items.push($(this).text().trim());
+            });
+            if (shopName) {
+                allData[shopName] = items;
+            }
+        });
+        localStorage.setItem('okaimono_list', JSON.stringify(allData));
+    }
+
+    $('#input-shop-clear-btn').on('click', function() {
+        $('#shop-input').val('');
+    });
+
+    $('#input-march-clear-btn').on('click', function() {
+        $('#shop-march').val(''); // 商品の入力欄を空にする
+    });
+
+    $('#display-table').on('click', '.shop-delete-btn', function() {
+        if (confirm('このお店と商品をすべて削除してもよろしいですか？')) {
+            $(this).closest('.table-row').remove();
+            saveAllData();
+        }
+    });
+
+    $('#display-table').on('click', '.march-delete-btn', function() {
+        const $checkedItems = $(this).closest('.table-row').find('span.checked');
+        if ($checkedItems.length === 0) {
+            alert('横線（ーー）がついた商品がありません。消したい商品をタップして横線をつけてから押してください！');
+            return;
+        }
+        if (confirm('横線（ーー）がついた商品をお買い物リストから消去しますか？')) {
+            $checkedItems.remove();
+            saveAllData();
+        }
+    });
+})
+
+
+
+</script>
+
+</body>
+</html>
